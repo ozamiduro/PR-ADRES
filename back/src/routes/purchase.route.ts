@@ -13,4 +13,4 @@ purchaseRouter.get("/", getAllPurchase as RequestHandler);
 purchaseRouter.get("/:id", getPurchaseById as RequestHandler);
 purchaseRouter.post("/", createPurchase as RequestHandler);
 purchaseRouter.put("/:id", updatePurchase as RequestHandler);
-purchaseRouter.put("/:id", activateOrDeactivatePurchase as RequestHandler);
+purchaseRouter.delete("/:id", activateOrDeactivatePurchase as RequestHandler);

@@ -1,4 +1,4 @@
-import { Sequelize, Model, DataTypes } from "sequelize";
+import { Sequelize } from "sequelize";
 import { initModels } from "./Models";
 import { PurchaseModel } from "./Models/Purchase.model";
 import { HistoryModel } from "./Models/History.model";

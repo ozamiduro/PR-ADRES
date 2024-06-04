@@ -9,6 +9,7 @@ export class PurchaseEntity extends PurchaseModel {
   unitValue: number;
   totalValue: number;
   supplier: string;
+  purchaseDate: Date;
   documentation: string;
   isActive: boolean;
 
@@ -20,6 +21,7 @@ export class PurchaseEntity extends PurchaseModel {
     unitValue: number,
     totalValue: number,
     supplier: string,
+    purchaseDate: Date,
     documentation: string,
     isActive: boolean
   ) {
@@ -31,6 +33,7 @@ export class PurchaseEntity extends PurchaseModel {
     this.unitValue = unitValue;
     this.totalValue = totalValue;
     this.supplier = supplier;
+    this.purchaseDate = purchaseDate;
     this.documentation = documentation;
     this.isActive = isActive;
   }

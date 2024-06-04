@@ -17,6 +17,7 @@ export const initPurchaseModel = (sequelize: Sequelize) => {
       unitValue: DataTypes.NUMBER,
       totalValue: DataTypes.NUMBER,
       supplier: DataTypes.STRING,
+      purchaseDate: DataTypes.DATE,
       documentation: DataTypes.STRING,
       isActive: DataTypes.BOOLEAN,
     },

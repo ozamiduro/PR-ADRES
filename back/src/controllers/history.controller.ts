@@ -10,9 +10,14 @@ export const getAllHistory = async (
   next: NextFunction
 ) => {
   try {
-    const history = await historyService.getAllHistory();
+    const { offset } = request.query;
+    console.log(offset);
+    const { rows, count } = await historyService.getAllHistory(Number(offset));
     response.send({
-      data: history,
+      data: {
+        rows,
+        total: count,
+      },
       timestamp: new Date(),
     });
   } catch (error) {
@@ -27,11 +32,18 @@ export const getHistoryByPurchaseId = async (
 ) => {
   try {
     const { id } = request.params;
+    const { offset } = request.query;
 
-    const history = await historyService.getHistoryByPurchaseId(Number(id));
+    const { rows, count } = await historyService.getHistoryByPurchaseId(
+      Number(id),
+      Number(offset)
+    );
 
     response.send({
-      data: history,
+      data: {
+        rows,
+        total: count,
+      },
       timestamp: new Date(),
     });
   } catch (error) {

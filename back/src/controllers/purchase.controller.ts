@@ -1,8 +1,12 @@
 import { NextFunction, Request, Response } from "express";
 import { PurchaseService } from "../service/purchase.service";
 import { PurchaseEntity } from "../entities/Purchase.entity";
+import { HistoryService } from "../service/history.service";
+import { PurchaseDTO, UpdatePurchaseDTO } from "../dto/Purchase.dto";
+import { handleValidation } from "../utils/validation";
 
 const purchaseService = new PurchaseService();
+const historyService = new HistoryService();
 
 export const getAllPurchase = async (
   request: Request,
@@ -10,10 +14,25 @@ export const getAllPurchase = async (
   next: NextFunction
 ) => {
   try {
-    const data = await purchaseService.getAllPurchase();
+    const { active, offset, filter, start, end } = request.query;
+
+    const query = isNaN(Number(filter)) ? filter : Number(filter);
+    const startDate = start ? new Date(start as string) : undefined;
+    const endDate = start ? new Date(end as string) : undefined;
+
+    const { rows, count } = await purchaseService.getAllPurchase(
+      active === "true",
+      Number(offset),
+      query as string | number | undefined,
+      startDate as Date | undefined,
+      endDate as Date | undefined
+    );
 
     response.send({
-      data,
+      data: {
+        rows,
+        total: count,
+      },
       timestamp: new Date(),
     });
   } catch (error) {
@@ -52,8 +71,22 @@ export const createPurchase = async (
       amount,
       unitValue,
       supplier,
+      purchaseDate,
       documentation,
     } = request.body;
+
+    const purchaseDTO = new PurchaseDTO(
+      Number(budget),
+      unity,
+      typeGoodOrService,
+      Number(amount),
+      Number(unitValue),
+      supplier,
+      purchaseDate,
+      documentation
+    );
+
+    await handleValidation(purchaseDTO);
 
     const purchase = new PurchaseEntity(
       budget,
@@ -63,6 +96,7 @@ export const createPurchase = async (
       unitValue,
       amount * unitValue,
       supplier,
+      purchaseDate,
       documentation,
       true
     );
@@ -92,8 +126,22 @@ export const updatePurchase = async (
       amount,
       unitValue,
       supplier,
+      purchaseDate,
       documentation,
     } = request.body;
+
+    const purchaseDTO = new UpdatePurchaseDTO(
+      Number(budget),
+      unity,
+      typeGoodOrService,
+      Number(amount),
+      Number(unitValue),
+      supplier,
+      purchaseDate,
+      documentation
+    );
+
+    await handleValidation(purchaseDTO);
 
     const purchase = await purchaseService.getPurchaseById(parseInt(id));
 
@@ -109,12 +157,24 @@ export const updatePurchase = async (
       unitValue || purchase.getDataValue("unitValue"),
       amount * unitValue || purchase.getDataValue("totalValue"),
       supplier || purchase.getDataValue("typeGoodOrService"),
+      purchaseDate || purchase.getDataValue("purchaseDate"),
       documentation || purchase.getDataValue("typeGoodOrService"),
       purchase.getDataValue("isActive")
     );
 
+    purchaseUpdated.id = Number(id);
+    const updatedDate = new Date(purchaseDate);
+    updatedDate.setHours(updatedDate.getHours() + 5);
+
+    purchaseUpdated.purchaseDate = updatedDate;
+
     const data = await purchaseService.updatePurchase(
       parseInt(id),
+      purchaseUpdated
+    );
+
+    await historyService.savePurchaseInHistory(
+      purchase.toJSON(),
       purchaseUpdated
     );
 
@@ -144,6 +204,10 @@ export const activateOrDeactivatePurchase = async (
     const data = await purchaseService.activateOrdeactivatePurchase(
       parseInt(id),
       !(purchase.getDataValue("isActive") as boolean)
+    );
+
+    await historyService.saveActivateOrDeactivatePurchaseInHistory(
+      purchase.toJSON()
     );
 
     response.send({

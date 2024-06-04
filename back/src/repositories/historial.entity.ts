@@ -2,7 +2,18 @@ import { HistoryModel } from "../config/db/Models/History.model";
 import { PurchaseEntity } from "../entities/Purchase.entity";
 
 export interface HistoryRepository {
-  getAllHistory(): Promise<HistoryModel[]>;
-  getHistoryByPurchaseId(id: number): Promise<HistoryModel[]>;
-  savePurchaseInHistory(purchase: PurchaseEntity): Promise<string>;
+  getAllHistory(
+    offset: number
+  ): Promise<{ rows: HistoryModel[]; count: number }>;
+  getHistoryByPurchaseId(
+    id: number,
+    offset: number
+  ): Promise<{ rows: HistoryModel[]; count: number }>;
+  savePurchaseInHistory(
+    purchase: PurchaseEntity,
+    purchaseUpdate: PurchaseEntity
+  ): Promise<string>;
+  saveActivateOrDeactivatePurchaseInHistory(
+    purchase: PurchaseEntity
+  ): Promise<string>;
 }
