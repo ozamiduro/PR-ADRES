@@ -1,4 +1,4 @@
-# Pruebas técnicas | Ozami Duque Rodriguez
+# Prueba técnica | Ozami Duque Rodriguez
 
 En el presente proyecto se presenta el desarrollo de la prueba técnica para el puesto de desarrollador, en donde se presenta el desarrollo de una aplicación web que permite el manejo e interactividad de los requisitos establecidos. Así mismo, se presenta una API que cumple las funcionalidades requeridas para el correcto funcionamiento.
 
@@ -31,9 +31,11 @@ Por el contrario, la parte del backend, está hecha con Node.js con Express.js, 
 ### Frontend
 
 Para abrir el frontend, abra la carpeta front del proyecto e de doble click al archivo index.html.
+
 Por el contrario si lo esta realizando por consola, sigua los siguientes pasos:
 
 > cd front/
+
 > start index.html
 
 ### Backend
@@ -41,5 +43,7 @@ Por el contrario si lo esta realizando por consola, sigua los siguientes pasos:
 Para abrir el backend, por linea de comando, siga los siguientes pasos:
 
 > cd back/
+
 > npm run build
+
 > npm start
