@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./asset/css/index.css" />
+    <link
+      href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./asset/js/index.js"></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+      rel="stylesheet"
+    />
+
+    <title>PR - ADRES</title>
+  </head>
+  <body>
+    <header>
+      <div class="image-container">
+        <img src="asset/imgs/ADRES.png" />
+      </div>
+    </header>
+    <main>
+      <section class="main-header flex flex-row gap-2 items-center">
+        <button onclick="modalFunctionality(true)" type="button" class="w-52 text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-3 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55">
+          <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+          </svg>
+          <span>Añadir adquisición</span>
+        </button>
+        <div class="flex flex-row gap-2">
+          <button onclick="onClickFilter()" type="button" class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-3 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55">
+            <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="white" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+            </svg>
+            <span>Buscar</span>
+          </button>
+          <div class="w-64">
+            <input placeholder="Buscar por ID, unidad o tipo" type="text" id="filter-input" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          </div>
+        </div>
+        <div date-rangepicker class="flex items-center">
+          <div class="relative">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                </svg>
+            </div>
+            <input id="start-date" name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Fecha inicial">
+          </div>
+          <span class="mx-1 text-gray-500">hasta</span>
+          <div class="relative">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                </svg>
+            </div>
+            <input id="end-date" name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Fecha final">
+          </div>
+        </div>
+        <div class="flex items-center me-4">
+          <input checked id="active-purchase-checkbox" onchange="getAllPurchases()" type="checkbox" value="" class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          <label for="active-purchase-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Ver activos</label>
+        </div>
+        <button onclick="cleanFilters()" type="button" class="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-3 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55">
+          <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15 15L21 21M21 15L15 21M10 21V14.6627C10 14.4182 10 14.2959 9.97237 14.1808C9.94787 14.0787 9.90747 13.9812 9.85264 13.8917C9.7908 13.7908 9.70432 13.7043 9.53137 13.5314L3.46863 7.46863C3.29568 7.29568 3.2092 7.2092 3.14736 7.10828C3.09253 7.01881 3.05213 6.92127 3.02763 6.81923C3 6.70414 3 6.58185 3 6.33726V4.6C3 4.03995 3 3.75992 3.10899 3.54601C3.20487 3.35785 3.35785 3.20487 3.54601 3.10899C3.75992 3 4.03995 3 4.6 3H19.4C19.9601 3 20.2401 3 20.454 3.10899C20.6422 3.20487 20.7951 3.35785 20.891 3.54601C21 3.75992 21 4.03995 21 4.6V6.33726C21 6.58185 21 6.70414 20.9724 6.81923C20.9479 6.92127 20.9075 7.01881 20.8526 7.10828C20.7908 7.2092 20.7043 7.29568 20.5314 7.46863L17 11" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+        </button>
+      </section>
+      <section>
+        <div id="purchase-cards"></div>
+        <div class="flex flex-col items-center mt-5">
+          <!-- Help text -->
+          <span class="text-sm text-gray-700 dark:text-gray-400">
+              Mostrando <span id="showing-first" class="font-semibold text-gray-900 dark:text-white">1</span> de <span id="showing-last" class="font-semibold text-gray-900 dark:text-white">10</span> de <span id="total-pages" class="font-semibold text-gray-900 dark:text-white">100</span> Datos
+          </span>
+          <!-- Buttons -->
+          <div class="inline-flex mt-2 xs:mt-0">
+              <button onclick="paginationPurchase(false)" class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  Anterior
+              </button>
+              <button onclick="paginationPurchase(true)" class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  Siguiente
+              </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- MODAL -->
+    <!-- Main modal -->
+    <div
+      id="purchase-details-modal"
+      tabindex="-1"
+      aria-hidden="true"
+      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 max-h-full bg-gray-900/50"
+    >
+      <div class="relative p-4 w-full max-w-4xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <!-- Modal header -->
+          <div
+            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+          >
+            <h3 id="id-title-modal" class="text-xl font-semibold text-gray-900 dark:text-white">
+            </h3>
+            <button
+              type="button"
+              class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              onclick="modalFunctionality()"
+              data-modal-hide="purchase-details-modal"
+            >
+              <svg
+                class="w-3 h-3"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                />
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+          <!-- Modal body -->
+          <div class="p-4 md:p-5">
+            <div class="grid gap-4 mb-4 grid-cols-3">
+              <!-- Presupuesto -->
+              <div class="col-span-1 sm:col-span-1">
+                <label
+                  for="budget"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Presupuesto</label
+                >
+                <input
+                  type="number"
+                  name="budget"
+                  id="budget"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="$10000"
+                  required=""
+                />
+              </div>
+              <!-- Tipo -->
+              <div class="col-span-1 sm:col-span-1">
+                <label
+                  for="typeGoodOrService"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Tipo de bien o servicio</label
+                >
+                <input
+                  type="text"
+                  name="typeGoodOrService"
+                  id="typeGoodOrService"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Medicamentos"
+                  required=""
+                />
+              </div>
+              <!-- Cantidad -->
+              <div class="col-span-1 sm:col-span-1">
+                <label
+                  for="amount"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Cantidad</label
+                >
+                <input
+                  onchange="calculateTotalValue()"
+                  type="number"
+                  name="amount"
+                  id="amount"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="10000"
+                  required=""
+                />
+              </div>
+              <!-- Unidad -->
+              <div class="col-span-2 sm:col-span-2">
+                <label
+                  for="unity"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Unidad</label
+                >
+                <input
+                  type="text"
+                  name="unity"
+                  id="unity"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Dirección de medicamentos y tecnologías en Salud"
+                  required=""
+                />
+              </div>
+              <!-- Fecha -->
+              <div class="col-span-2 sm:col-span-1">
+                <label
+                  for="purchaseDate"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Fecha de adquisición</label
+                >
+                <input
+                  type="date"
+                  name="purchaseDate"
+                  id="purchaseDate"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  required=""
+                />
+              </div>
+              <!-- Valor Unitario -->
+              <div class="col-span-3 sm:col-span-1">
+                <label
+                  for="unitValue"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Valor unitario</label
+                >
+                <input
+                  onchange="calculateTotalValue()"
+                  type="number"
+                  name="unitValue"
+                  id="unitValue"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="$1000"
+                  required=""
+                />
+              </div>
+              <!-- Valor total -->
+              <div class="col-span-2 sm:col-span-1">
+                <label
+                  for="totalValue"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Valor total</label
+                >
+                <input
+                  type="number"
+                  name="totalValue"
+                  id="totalValue"
+                  class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="$10000000"
+                  required=""
+                  disabled
+                />
+              </div>
+              <!-- Proveedor -->
+              <div class="col-span-1 sm:col-span-1">
+                <label
+                  for="supplier"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Proveedor</label
+                >
+                <input
+                  type="text"
+                  name="supplier"
+                  id="supplier"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Laboratorios Bayer S.A."
+                  required=""
+                />
+              </div>
+              <!-- Doc -->
+              <div class="col-span-3 sm:col-span-2">
+                <label
+                  for="documentation"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Documentación</label
+                >
+                <input
+                  type="text"
+                  name="documentation"
+                  id="documentation"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder=" Orden de compra No. 2023-07-20-001, factura No. 2023-07-20-001"
+                  required=""
+                />
+              </div>
+              <button type="button" onclick="() => onClickModalBtn()" id="modal-button" class="col-span-3 text-white inline-flex w-full justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Actualizar
+            </button>
+            </form>
+          </div>
+          <div id="history-table"></div>
+          <div id="pagination-history" class="flex flex-col items-center mt-5">
+            <!-- Help text -->
+            <span class="text-sm text-gray-700 dark:text-gray-400">
+                Mostrando <span id="showing-history-first" class="font-semibold text-gray-900 dark:text-white">1</span> de <span id="showing-history-last" class="font-semibold text-gray-900 dark:text-white">10</span> de <span id="total-history-pages" class="font-semibold text-gray-900 dark:text-white">100</span> Datos
+            </span>
+            <!-- Buttons -->
+            <div class="inline-flex mt-2 xs:mt-0">
+              <button onclick="paginationHistory(false)" class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  Anterior
+              </button>
+              <button onclick="paginationHistory(true)" class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  Siguiente
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+  </body>
+</html>

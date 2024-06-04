@@ -1,0 +1,62 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  min-height: 100vh;
+}
+
+:root {
+  --neutral: #ffffff;
+  --dark-blue: #283557;
+  --light-blue: #5068b2;
+  --light: #7ce2e6;
+  --green: #13d5b0;
+}
+
+header {
+  padding: 1em;
+  background-color: var(--dark-blue);
+}
+
+.image-container {
+  height: 100%;
+  width: 150px;
+}
+
+.image-container img {
+  object-fit: cover;
+  height: 100%;
+}
+
+main {
+  padding: 20px;
+}
+
+.main-header {
+  border-top: 2px solid var(--green);
+  border-bottom: 2px solid var(--green);
+  border-radius: 4px;
+  width: 100%;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  margin-bottom: 20px;
+  justify-content: space-around;
+}
+
+.main-header input {
+  max-height: 35px;
+}
+
+.main-header button {
+  max-height: 35px;
+  width: fit-content;
+  gap: 5px;
+  background-color: var(--dark-blue) !important;
+}
+
+#modal-button {
+  background-color: var(--dark-blue) !important;
+}
