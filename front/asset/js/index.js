@@ -264,8 +264,10 @@ const onClickModalBtn = () => {
 
   if (btn.innerText === "Añadir") {
     savePurchases();
+    modalFunctionality();
   } else {
     updatePurchase();
+    modalFunctionality();
   }
   cleanModal();
 };
@@ -301,6 +303,12 @@ const paginationHistory = (isNext) => {
     offsetHistory * 10 + 1;
   document.getElementById("showing-history-last").innerText =
     offsetHistory * 10 + 10;
+};
+
+const setDocumentation = () => {
+  const date = document.getElementById("purchaseDate").value;
+  document.getElementById("documentation").value =
+    `Orden de compra No. ${date}, factura No. ${date}`;
 };
 
 /* SERVICIOS */
