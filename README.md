@@ -16,7 +16,7 @@ Por el contrario, la parte del backend, está hecha con Node.js con Express.js, 
 
 1. Clona el repositorio:
 
-> https://github.com/ozamiduro/PR-ADRES.git
+> git clone https://github.com/ozamiduro/PR-ADRES.git
 
 2. Navega al directorio del proyecto:
 
