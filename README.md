@@ -18,7 +18,12 @@ Por el contrario, la parte del backend, está hecha con Node.js con Express.js, 
 
 > git clone https://github.com/ozamiduro/PR-ADRES.git
 
+
 2. Navega al directorio del proyecto:
+
+> cd PR-ADRES/
+
+3. Navega al directorio del backend del proyecto:
 
 > cd back/
 
@@ -32,7 +37,7 @@ Por el contrario, la parte del backend, está hecha con Node.js con Express.js, 
 
 Para abrir el frontend, abra la carpeta front del proyecto e de doble click al archivo index.html.
 
-Por el contrario si lo esta realizando por consola, sigua los siguientes pasos:
+Por el contrario si lo esta realizando por consola, ubiquese en la raíz del proyecto, y siga los siguientes pasos:
 
 > cd front/
 
@@ -40,7 +45,7 @@ Por el contrario si lo esta realizando por consola, sigua los siguientes pasos:
 
 ### Backend
 
-Para abrir el backend, por linea de comando, siga los siguientes pasos:
+Para abrir el backend, por linea de comando, ubiquese en la raíz del proyecto, y siga los siguientes pasos:
 
 > cd back/
 
