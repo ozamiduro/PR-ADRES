@@ -56,7 +56,11 @@ export class HistoryService implements HistoryRepository {
         purchase.supplier !== purchaseUpdate.supplier
           ? purchaseUpdate.supplier
           : null,
-      purchaseDate: new Date(),
+      purchaseDate:
+        new Date(purchase.purchaseDate).getTime() !==
+        new Date(purchaseUpdate.supplier).getTime()
+          ? new Date(purchase.purchaseDate)
+          : null,
       documentation:
         purchase.documentation !== purchaseUpdate.documentation
           ? purchaseUpdate.documentation
